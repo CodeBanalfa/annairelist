@@ -1,0 +1,16 @@
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import"./footer.css"
+const Footer=()=>{
+    return(
+        <>
+         <AppBar  position="static" color="primary" sx={{ marginTop: 10 }}>
+        <Toolbar className="H1">
+          <Typography variant="body2" color="inherit" sx={{ flexGrow: 1, textAlign: 'center' }}>
+            © faire de moi-même.
+          </Typography>
+        </Toolbar>
+      </AppBar>
+        </>
+    )
+}
+export default Footer;
