@@ -1,0 +1,9 @@
+.select{
+   
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(233, 10, 10, 0.1) transparent;
+    cursor: pointer;
+    background: #bf2020;
+   
+}
