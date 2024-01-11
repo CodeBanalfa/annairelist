@@ -1,0 +1,10 @@
+{
+    "common":{
+
+        "Nom" : "Name",
+        "Prénom":"Prénom",
+        "Date de naissance":"Date de naissance",
+        "Addresse":"address",
+        "Genre":"gender"
+
+}}
