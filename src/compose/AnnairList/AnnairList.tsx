@@ -13,8 +13,10 @@ import {
 } from '@mui/material';
 import DataData from '../../data/DataData';
 import Annaire from '../../data/DataType';
-
-const AnnairList = () => {
+interface Props {
+  annauires: Annaire[];
+}
+const AnnairList = ({annauires}:Props) => {
   const [annaires, setAnnaires] = useState(DataData);
   const [selectedLetter, setSelectedLetter] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
@@ -23,6 +25,7 @@ const AnnairList = () => {
     const sortedAnnaires = [...annaires].sort((a, b) => {
       const fullNameA = `${a.nom} ${a.prenom}`.toLowerCase();
       const fullNameB = `${b.nom} ${b.prenom}`.toLowerCase();
+
 
       if (fullNameA < fullNameB) {
         return order === 'asc' ? -1 : 1;
@@ -63,10 +66,10 @@ const AnnairList = () => {
           open={Boolean(anchorEl)}
           onClose={() => setAnchorEl(null)}
         >
-          <MenuItem onClick={() => handleSort('asc')}></MenuItem>
+      
           
         </Menu>
-        <InputLabel variant="standard" htmlFor="uncontrolled-native" style={{ paddingRight: '50px' ,width:'100px',textAlign: 'left',display:"flex",alignContent:"end"}}>
+        <InputLabel variant="standard" htmlFor="tri-par" style={{ paddingRight: '50px' ,width:'100px',textAlign: 'left',display:"flex",alignContent:"end"}}>
           tri par
           <TextField
           select
@@ -75,7 +78,7 @@ const AnnairList = () => {
           margin="normal"
           onChange={handleLetterChange}
           value={selectedLetter}
-         
+          aria-labelledby="tri-par"
           
         >
           <MenuItem value="">All</MenuItem>
