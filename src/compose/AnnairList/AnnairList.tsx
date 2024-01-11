@@ -57,14 +57,13 @@ const AnnairList = ({annauires}:Props) => {
           tri par
           <TextField
           select
-           aria-label="tri par" 
+          aria-labelledby="Tri" 
           variant="outlined"
           fullWidth
           margin="normal"
           onChange={handleLetterChange}
           value={selectedLetter}
-          aria-labelledby="tri-par"
-          
+           
         >
           <MenuItem value="">All</MenuItem>
           {letters.map((letter) => (
@@ -79,13 +78,14 @@ const AnnairList = ({annauires}:Props) => {
           {filteredAnnaires.map((entry: Annaire) => (
             <Grid item key={entry.id} xs={17} sm={12} md={8} lg={6}>
               <Card >
+              <IconButton aria-label="Supprimer" style={{display:"flex", alignItems:"flex-start",gap:"calc(20px + 10%)"}} onClick={() => handleDelete(entry.id)} >
+                    <CloseIcon />
+                  </IconButton>
                 <CardContent style={{ display: 'flex', alignItems: 'center' }}>
                   <Box style={{ flex: 70, paddingRight: 16 }}>
                     <img src={entry.picture} alt={entry.nom} style={{ width: '100%' }} />
                   </Box>
-                  <IconButton aria-label="Supprimer" style={{display:"", alignItems:"flex-start",gap:"calc(20px + 10%)"}} onClick={() => handleDelete(entry.id)} >
-                    <CloseIcon />
-                  </IconButton>
+                
                   <Box style={{ flex: 70 }} >
                     <Typography variant="h5">Nom:{entry.nom}</Typography>
                     <Typography variant="h5">Prénom:{entry.prenom}</Typography>
