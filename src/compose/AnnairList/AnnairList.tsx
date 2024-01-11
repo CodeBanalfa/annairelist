@@ -9,8 +9,10 @@ import {
   TextField,
   MenuItem,
   InputLabel,
-  Menu,
+  IconButton,
+  Box,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import DataData from '../../data/DataData';
 import Annaire from '../../data/DataType';
 interface Props {
@@ -19,34 +21,22 @@ interface Props {
 const AnnairList = ({annauires}:Props) => {
   const [annaires, setAnnaires] = useState(DataData);
   const [selectedLetter, setSelectedLetter] = useState('');
-  const [anchorEl, setAnchorEl] = useState(null);
+  
  
-  const handleSort = (order: 'asc' ) => {
-    const sortedAnnaires = [...annaires].sort((a, b) => {
-      const fullNameA = `${a.nom} ${a.prenom}`.toLowerCase();
-      const fullNameB = `${b.nom} ${b.prenom}`.toLowerCase();
-
-
-      if (fullNameA < fullNameB) {
-        return order === 'asc' ? -1 : 1;
-      }
-      if (fullNameA > fullNameB) {
-        return order === 'asc' ? 1 : -1;
-      }
-      return 0;
-    });
-
-    setAnnaires(sortedAnnaires);
-    setAnchorEl(null);
-  };
-
+  
   const handleLetterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedLetter(event.target.value);
   };
-
+   // Supprimer l'annuaire avec l'id spécifié
+  const handleDelete = (id: number) => {
+   
+    const updatedAnnaires = annaires.filter((annaire) => annaire.id !== id);
+    setAnnaires(updatedAnnaires);
+  };
+  // Filtrer les données en fonction de la lettre sélectionnée
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
-  // Filtrer les données en fonction de la lettre sélectionnée
+  
   const filteredAnnaires = annaires.filter((annaire) => {
     const fullName = `${annaire.nom} ${annaire.prenom}`.toLowerCase();
     return (
@@ -59,16 +49,7 @@ const AnnairList = ({annauires}:Props) => {
   return (
     <>
       <Container >
-      <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-        >
-      
-          
-        </Menu>
+    
         <InputLabel variant="standard" htmlFor="tri-par" style={{ paddingRight: '50px' ,width:'100px',textAlign: 'left',display:"flex",alignContent:"end"}}>
           tri par
           <TextField
@@ -92,19 +73,22 @@ const AnnairList = ({annauires}:Props) => {
         
         <Grid container spacing={2} >
           {filteredAnnaires.map((entry: Annaire) => (
-            <Grid item key={entry.id} xs={12} sm={6} md={4} lg={3}>
-              <Card>
+            <Grid item key={entry.id} xs={17} sm={12} md={8} lg={6}>
+              <Card >
                 <CardContent style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ flex: 1, paddingRight: 16 }}>
+                  <Box style={{ flex: 70, paddingRight: 16 }}>
                     <img src={entry.picture} alt={entry.nom} style={{ width: '100%' }} />
-                  </div>
-                  <div style={{ flex: 2 }}>
+                  </Box>
+                  <Box style={{ flex: 70 }} >
                     <Typography variant="h5">{entry.nom}</Typography>
                     <Typography variant="subtitle1">{entry.prenom}</Typography>
                     <Typography variant="body1">Date de naissance: {entry.dateDeNaissance}</Typography>
                     <Typography variant="body1">Adresse: {entry.address}</Typography>
                     <Typography variant="body1">Genre: {entry.genre}</Typography>
-                  </div>
+                  </Box>
+                  <IconButton style={{display:"flex", alignItems:"flex-start"}} onClick={() => handleDelete(entry.id)}>
+                    <CloseIcon />
+                  </IconButton>
                 </CardContent>
               </Card>
             </Grid>

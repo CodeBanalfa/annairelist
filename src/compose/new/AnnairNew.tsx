@@ -66,8 +66,8 @@ const AnnuaireNew = ({ Annuaire, handleCloseNew, handleAnnairChange,handleAddAnn
      />
 
         <CardContent style={{ display: "flex", alignItems: "center" ,top:90}}>
-          <Button onClick={() => handleImageSelection('homme')}>Image Homme</Button>
-          <Button onClick={() => handleImageSelection('femme')}>Image Femme</Button>
+          <Button onClick={() => handleImageSelection('homme')}> Homme</Button>
+          <Button onClick={() => handleImageSelection('femme')}> Femme</Button>
           <Box style={{paddingLeft:50,top:90, justifyContent: "space-between"}}>
         
             <TextField
@@ -96,7 +96,7 @@ const AnnuaireNew = ({ Annuaire, handleCloseNew, handleAnnairChange,handleAddAnn
               fullWidth
               id="dateDeNaissance"
               name="dateDeNaissance"
-              label="dateDeNaissance"
+              type='date'
               value={formik.values.dateDeNaissance}
               onChange={formik.handleChange}
               error={formik.touched.dateDeNaissance && Boolean(formik.errors.dateDeNaissance)}
@@ -108,6 +108,7 @@ const AnnuaireNew = ({ Annuaire, handleCloseNew, handleAnnairChange,handleAddAnn
               id="address"
               name="address"
               label="address"
+              type='adress'
               value={formik.values.address}
               onChange={formik.handleChange}
               error={formik.touched.address && Boolean(formik.errors.address)}
